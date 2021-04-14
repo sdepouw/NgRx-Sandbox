@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
 import { select, Store } from '@ngrx/store';
+import { debounceTime, tap } from 'rxjs/operators';
 import { selectCurrentAPICount } from './state/api-call-count.selectors';
-import { TodoItem } from './state/todo-model';
 import { clearTodos, getTodos, getTodosSuccess } from './state/todos.actions';
 import { selectAllTodoItems } from './state/todos.selectors';
 
@@ -14,8 +14,7 @@ import { selectAllTodoItems } from './state/todos.selectors';
 export class AppComponent implements OnInit {
   todoItems$ = this.store.pipe(select(selectAllTodoItems));
   numberOfAPICalls$ = this.store.pipe(select(selectCurrentAPICount));
-
-  directItems: TodoItem[];
+  showingOff = false;
 
   constructor(
     private store: Store,
@@ -24,7 +23,11 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.actions$.pipe(ofType(getTodosSuccess))
-      .subscribe(() => { console.log('Success Message could be displayed with this!'); });
+      .pipe(
+        tap(() => { this.showingOff = true; }),
+        debounceTime(3000),
+        tap(() => { this.showingOff = false; })
+      ).subscribe();
   }
 
   getTheGoods() {

@@ -1,5 +1,9 @@
 <h1>Hello, World!</h1>
 
+<div *ngIf="showingOff" style="margin-bottom: 30px;">
+  Successfully Got!
+</div>
+
 <button (click)="getTheGoods()">Get the Goods</button> | <button (click)="clear()">Clear 'em Out</button>
 <h6>Gottem {{ numberOfAPICalls$ | async }} times</h6>
 
