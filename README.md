@@ -1,4 +1,13 @@
-# NgrxSandbox
+# NgRx Sandbox
+
+## Notes
+
+- Installed `@ngrx` packages, and proceeded to downgrade them from v11 due to compile error out of the box
+- Created basic actions/reducers/selectors/effects
+- Discovered that the declarations in `forRoot` must match with the `AppState` properties declared, otherwise the correct States won't happen
+- Discovered you have to install a special package to get Redux extensions in browsers to pick up on your App State
+
+## Default Generated Stuff
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.4.
 
