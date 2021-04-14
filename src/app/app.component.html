@@ -5,6 +5,6 @@
 
 <ul>
   <li *ngFor="let todo of todoItems$ | async">
-    {{ todo.id }} - {{ todo.title }} (Complete? {{ todo.completed }})
+    {{ todo.id }} - {{ todo.title }} (Complete? <strong>{{ todo.completed ? 'Yep!' : 'Nope' }}</strong>)
   </li>
 </ul>
