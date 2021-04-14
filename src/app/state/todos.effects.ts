@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { EMPTY, of } from 'rxjs';
-import { mergeMap, catchError } from 'rxjs/operators';
+import { EMPTY } from 'rxjs';
+import { map, mergeMap, catchError } from 'rxjs/operators';
 import { TodosService } from '../services/todos.service';
-import { incrementAPICallCount } from './api-call-count.actions';
 import { getTodos, getTodosSuccess } from './todos.actions';
 
 @Injectable()
@@ -12,11 +11,8 @@ export class TodosEffects {
         ofType(getTodos.type),
         mergeMap(() => this.todosService.getTodos()
             .pipe(
-                mergeMap(todos => [
-                    ({ type: getTodosSuccess.type, todoItems: todos }),
-                    ({ type: incrementAPICallCount.type })
-                ]),
-                catchError(() => of({ type: incrementAPICallCount.type }))
+                map(todos => ({ type: getTodosSuccess.type, todoItems: todos })),
+                catchError(() => EMPTY)
             )
         )
     ));
