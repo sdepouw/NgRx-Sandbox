@@ -28,13 +28,9 @@ export class AppComponent implements OnInit {
     this.displayMessageOnAction(clearTodos, 'All Cleaned Up!');
   }
 
-  displayMessageOnAction(action: Action, message: string, displayLengthInSeconds = 3) {
+  displayMessageOnAction(action: Action, message: string) {
     this.actions$.pipe(ofType(action.type))
-      .pipe(
-        tap(() => { this.store.dispatch(displayMessage({ message })); }),
-        debounceTime(displayLengthInSeconds * 1000),
-        tap(() => { this.store.dispatch(clearMessage()); })
-      ).subscribe();
+      .subscribe(() => { this.store.dispatch(displayMessage({ message })); });
   }
 
   getTheGoods() {

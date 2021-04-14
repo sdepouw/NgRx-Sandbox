@@ -11,6 +11,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { apiCallCountReducer } from './state/api-call-count.reducers';
 import { messageReducer } from './state/message.reducers';
+import { MessageEffects } from './state/message.effects';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,7 @@ import { messageReducer } from './state/message.reducers';
     BrowserModule,
     AppRoutingModule,
     StoreModule.forRoot({ apiCallCount: apiCallCountReducer, todoItems: todosReducer, message: messageReducer }),
-    EffectsModule.forRoot([TodosEffects]),
+    EffectsModule.forRoot([TodosEffects, MessageEffects]),
     StoreDevtoolsModule.instrument(),
     HttpClientModule
   ],
