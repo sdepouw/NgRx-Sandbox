@@ -1,7 +1,7 @@
 <h1>Hello, World!</h1>
 
-<div *ngIf="message" style="margin-bottom: 30px;">
-  {{ message }}
+<div *ngIf="message$ | async as message" style="margin-bottom: 30px;">
+  {{ message$ | async }}
 </div>
 
 <button (click)="getTheGoods()">Get the Goods</button> | <button (click)="clear()">Clear 'em Out</button>

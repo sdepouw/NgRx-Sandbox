@@ -5,6 +5,8 @@ import { debounceTime, tap } from 'rxjs/operators';
 import { selectCurrentAPICount } from './state/api-call-count.selectors';
 import { clearTodos, getTodos, getTodosSuccess } from './state/todos.actions';
 import { selectAllTodoItems } from './state/todos.selectors';
+import { selectMessage } from './state/message.selectors';
+import { displayMessage, clearMessage } from './state/message.actions';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +16,7 @@ import { selectAllTodoItems } from './state/todos.selectors';
 export class AppComponent implements OnInit {
   todoItems$ = this.store.pipe(select(selectAllTodoItems));
   numberOfAPICalls$ = this.store.pipe(select(selectCurrentAPICount));
-  message = '';
+  message$ = this.store.pipe(select(selectMessage));
 
   constructor(
     private store: Store,
@@ -29,9 +31,9 @@ export class AppComponent implements OnInit {
   displayMessageOnAction(action: Action, message: string, displayLengthInSeconds = 3) {
     this.actions$.pipe(ofType(action.type))
       .pipe(
-        tap(() => { this.message = message; }),
+        tap(() => { this.store.dispatch(displayMessage({ message })); }),
         debounceTime(displayLengthInSeconds * 1000),
-        tap(() => { this.message = ''; })
+        tap(() => { this.store.dispatch(clearMessage()); })
       ).subscribe();
   }
 
