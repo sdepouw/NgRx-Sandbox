@@ -9,3 +9,7 @@ export const getTodosSuccess = createAction(
     '[TODO] Get TODO Items Success',
     props<{ todoItems: TodoItem[] }>()
 );
+
+export const clearTodos = createAction(
+    '[TODO] Clear All TODO Items'
+);

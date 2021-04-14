@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
 import { select, Store } from '@ngrx/store';
 import { TodoItem } from './state/todo-model';
-import { getTodos, getTodosSuccess } from './state/todos.actions';
+import { clearTodos, getTodos, getTodosSuccess } from './state/todos.actions';
 import { selectAllTodoItems } from './state/todos.selectors';
 
 @Component({
@@ -28,5 +28,10 @@ export class AppComponent implements OnInit {
 
   getTheGoods() {
     this.store.dispatch(getTodos());
+  }
+
+  clear() {
+    this.store.dispatch(clearTodos());
+    this.numberOfRetrievals = 0;
   }
 }
