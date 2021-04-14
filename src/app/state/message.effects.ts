@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { tap, debounceTime, mergeMap } from 'rxjs/operators';
+import { tap, debounceTime } from 'rxjs/operators';
 import { displayMessage, clearMessage } from './message.actions';
 import { Store } from '@ngrx/store';
 
