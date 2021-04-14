@@ -10,9 +10,12 @@ export class MessageEffects {
         () =>
             this.actions$.pipe(
                 ofType(displayMessage),
-                debounceTime(3000),
+                debounceTime(3000), // TODO: Inject timeout via displayMessage action?
                 tap(_ => this.store.dispatch(clearMessage()))
-            )
+            ),
+        // dispatch: false the re-dispatch of displayMessage.
+        // Since we're not piping into another Action to dispatch, it re-dispatches.
+        { dispatch: false }
     );
 
     constructor(
