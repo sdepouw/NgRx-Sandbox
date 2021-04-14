@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
 import { select, Store } from '@ngrx/store';
+import { selectCurrentAPICount } from './state/api-call-count.selectors';
 import { TodoItem } from './state/todo-model';
 import { clearTodos, getTodos, getTodosSuccess } from './state/todos.actions';
 import { selectAllTodoItems } from './state/todos.selectors';
@@ -12,7 +13,7 @@ import { selectAllTodoItems } from './state/todos.selectors';
 })
 export class AppComponent implements OnInit {
   todoItems$ = this.store.pipe(select(selectAllTodoItems));
-  numberOfRetrievals = 0;
+  numberOfAPICalls$ = this.store.pipe(select(selectCurrentAPICount));
 
   directItems: TodoItem[];
 
@@ -23,7 +24,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.actions$.pipe(ofType(getTodosSuccess))
-      .subscribe(() => { this.numberOfRetrievals++; });
+      .subscribe(() => { console.log('Success Message could be displayed with this!'); });
   }
 
   getTheGoods() {
@@ -32,6 +33,5 @@ export class AppComponent implements OnInit {
 
   clear() {
     this.store.dispatch(clearTodos());
-    this.numberOfRetrievals = 0;
   }
 }

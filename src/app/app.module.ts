@@ -9,6 +9,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { todosReducer } from './state/todos.reducers';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { apiCallCountReducer } from './state/api-call-count.reducers';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot({ todoItems: todosReducer }),
+    StoreModule.forRoot({ apiCallCount: apiCallCountReducer, todoItems: todosReducer }),
     EffectsModule.forRoot([TodosEffects]),
     StoreDevtoolsModule.instrument(),
     HttpClientModule

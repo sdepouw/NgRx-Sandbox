@@ -1,7 +1,7 @@
 <h1>Hello, World!</h1>
 
 <button (click)="getTheGoods()">Get the Goods</button> | <button (click)="clear()">Clear 'em Out</button>
-<h6>Gottem {{ numberOfRetrievals }} times</h6>
+<h6>Gottem {{ numberOfAPICalls$ | async }} times</h6>
 
 <ul>
   <li *ngFor="let todo of todoItems$ | async">
