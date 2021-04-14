@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { EMPTY } from 'rxjs';
+import { EMPTY, of } from 'rxjs';
 import { mergeMap, catchError } from 'rxjs/operators';
 import { TodosService } from '../services/todos.service';
 import { incrementAPICallCount } from './api-call-count.actions';
@@ -16,7 +16,7 @@ export class TodosEffects {
                     ({ type: getTodosSuccess.type, todoItems: todos }),
                     ({ type: incrementAPICallCount.type })
                 ]),
-                catchError(() => EMPTY)
+                catchError(() => of({ type: incrementAPICallCount.type }))
             )
         )
     ));
