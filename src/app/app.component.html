@@ -1,7 +1,7 @@
 <h1>Hello, World!</h1>
 
-<div *ngIf="showingOff" style="margin-bottom: 30px;">
-  Successfully Got!
+<div *ngIf="message" style="margin-bottom: 30px;">
+  {{ message }}
 </div>
 
 <button (click)="getTheGoods()">Get the Goods</button> | <button (click)="clear()">Clear 'em Out</button>

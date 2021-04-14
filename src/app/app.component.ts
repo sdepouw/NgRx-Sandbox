@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
-import { select, Store } from '@ngrx/store';
+import { select, Store, Action } from '@ngrx/store';
 import { debounceTime, tap } from 'rxjs/operators';
 import { selectCurrentAPICount } from './state/api-call-count.selectors';
 import { clearTodos, getTodos, getTodosSuccess } from './state/todos.actions';
@@ -14,7 +14,7 @@ import { selectAllTodoItems } from './state/todos.selectors';
 export class AppComponent implements OnInit {
   todoItems$ = this.store.pipe(select(selectAllTodoItems));
   numberOfAPICalls$ = this.store.pipe(select(selectCurrentAPICount));
-  showingOff = false;
+  message = '';
 
   constructor(
     private store: Store,
@@ -22,11 +22,16 @@ export class AppComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.actions$.pipe(ofType(getTodosSuccess))
+    this.displayMessageOnAction(getTodosSuccess, 'Successfully Got!');
+    this.displayMessageOnAction(clearTodos, 'All Cleaned Up!');
+  }
+
+  displayMessageOnAction(action: Action, message: string, displayLengthInSeconds = 3) {
+    this.actions$.pipe(ofType(action.type))
       .pipe(
-        tap(() => { this.showingOff = true; }),
-        debounceTime(3000),
-        tap(() => { this.showingOff = false; })
+        tap(() => { this.message = message; }),
+        debounceTime(displayLengthInSeconds * 1000),
+        tap(() => { this.message = ''; })
       ).subscribe();
   }
 
