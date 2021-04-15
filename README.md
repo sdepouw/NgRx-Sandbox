@@ -6,6 +6,10 @@
 - Created basic actions/reducers/selectors/effects
 - Discovered that the declarations in `forRoot` must match with the `AppState` properties declared, otherwise the correct States won't happen
 - Discovered you have to install a special package to get Redux extensions in browsers to pick up on your App State
+- `createFeatureSelector` seemingly shortcuts all the way down to the object?
+  - Example: `AppState` has `foo: TodoState` property
+  - `TodoState` has `todoItems: TodoItem[]`
+  - `const fs = createFeatureSeelctor('foo')` and `createSelector(fs, (todoState: TodoState) => todoState.todoItems)` is what's needed to select.
 
 ## Default Generated Stuff
 
