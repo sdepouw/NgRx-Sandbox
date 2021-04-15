@@ -8,4 +8,5 @@ export interface AppState {
 
 export interface TodoState {
     todoItems: ReadonlyArray<TodoItem>;
+    todoListTitle: string;
 }

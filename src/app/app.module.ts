@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { TodosEffects } from './state/todos.effects';
 import { EffectsModule } from '@ngrx/effects';
-import { todosReducer } from './state/todos.reducers';
+import { todosReducer, todoListTitleReducer } from './state/todos.reducers';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { apiCallCountReducer } from './state/api-call-count.reducers';
@@ -22,7 +22,7 @@ import { MessageEffects } from './state/message.effects';
     AppRoutingModule,
     StoreModule.forRoot({ apiCallCount: apiCallCountReducer, message: messageReducer }),
     EffectsModule.forRoot([MessageEffects]),
-    StoreModule.forFeature('foo', { todoItems: todosReducer }),
+    StoreModule.forFeature('foo', { todoItems: todosReducer, todoListTitle: todoListTitleReducer }),
     EffectsModule.forFeature([TodosEffects]),
     StoreDevtoolsModule.instrument(),
     HttpClientModule

@@ -13,3 +13,8 @@ export const selectFirstTodoItem = createSelector(
     selectAllTodoItems,
     (todoItems: ReadonlyArray<TodoItem>) => todoItems && todoItems.length > 0 ? [todoItems[0]] : []
 );
+
+export const selectTodoTitle = createSelector(
+    selectTodoFeature,
+    (todoState: TodoState) => todoState.todoListTitle
+);
