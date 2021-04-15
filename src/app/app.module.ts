@@ -20,8 +20,10 @@ import { MessageEffects } from './state/message.effects';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot({ apiCallCount: apiCallCountReducer, todoItems: todosReducer, message: messageReducer }),
-    EffectsModule.forRoot([TodosEffects, MessageEffects]),
+    StoreModule.forRoot({ apiCallCount: apiCallCountReducer, message: messageReducer }),
+    EffectsModule.forRoot([MessageEffects]),
+    StoreModule.forFeature('foo', { todoItems: todosReducer }),
+    EffectsModule.forFeature([TodosEffects]),
     StoreDevtoolsModule.instrument(),
     HttpClientModule
   ],
