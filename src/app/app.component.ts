@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
-import { select, Store, Action } from '@ngrx/store';
-import { debounceTime, tap } from 'rxjs/operators';
+import { Store, Action } from '@ngrx/store';
 import { selectCurrentAPICount } from './state/api-call-count.selectors';
 import { clearTodos, getTodos, getTodosSuccess } from './state/todos.actions';
 import { selectAllTodoItems } from './state/todos.selectors';
 import { selectMessage } from './state/message.selectors';
-import { displayMessage, clearMessage } from './state/message.actions';
+import { displayMessage } from './state/message.actions';
 
 @Component({
   selector: 'app-root',
@@ -14,9 +13,9 @@ import { displayMessage, clearMessage } from './state/message.actions';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  todoItems$ = this.store.pipe(select(selectAllTodoItems));
-  numberOfAPICalls$ = this.store.pipe(select(selectCurrentAPICount));
-  message$ = this.store.pipe(select(selectMessage));
+  todoItems$ = this.store.select(selectAllTodoItems);
+  numberOfAPICalls$ = this.store.select(selectCurrentAPICount);
+  message$ = this.store.select(selectMessage);
 
   constructor(
     private store: Store,
