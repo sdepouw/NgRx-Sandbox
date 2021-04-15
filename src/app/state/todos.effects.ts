@@ -11,7 +11,7 @@ export class TodosEffects {
         ofType(getTodos),
         mergeMap(() => this.todosService.getTodos()
             .pipe(
-                map(todos => ({ type: getTodosSuccess.type, todoItems: todos })),
+                map(todos => getTodosSuccess({ todoItems: todos })),
                 catchError(() => EMPTY)
             )
         )
