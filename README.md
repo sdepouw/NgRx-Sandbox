@@ -16,6 +16,11 @@
   - Like root, a different reducer is needed for each property, and a reducer **should only work with that one property!**
   - That is, if you assign the reducer to the property instead of the whole state. See `PizzaState` for an example.
 
+## Testing Selectors
+- Using `projector()` works nicely, feeding it what will get *projected* (i.e. **after the first argument of the selector filters it down**) and testing the result
+- `mySelector.projector(pizzaState)` is equivalent of the following:
+  - `of(state).pipe(select(selectPizzaFeature)).subscribe(selected => { /* selected === pizzaState */ });`
+
 ## Default Generated Stuff
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.4.
