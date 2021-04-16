@@ -1,7 +1,7 @@
 import * as fromReducer from './message.reducers';
 import { displayMessage } from './message.actions';
 
-describe('MessageReducers', () => {
+describe('Message Reducer', () => {
     describe('Unknown Action', () => {
         it('should return the default state', () => {
             const { initialState } = fromReducer;
