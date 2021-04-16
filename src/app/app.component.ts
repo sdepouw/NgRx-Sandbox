@@ -6,6 +6,7 @@ import { clearTodos, getTodos, getTodosSuccess } from './state/todos.actions';
 import { selectAllTodoItems, selectTodoTitle } from './state/todos.selectors';
 import { selectMessage } from './state/message.selectors';
 import { displayMessage } from './state/message.actions';
+import { isThePizzaReady } from './state/pizza.selectors';
 
 @Component({
   selector: 'app-root',
@@ -17,6 +18,7 @@ export class AppComponent implements OnInit {
   todoItems$ = this.store.select(selectAllTodoItems);
   numberOfAPICalls$ = this.store.select(selectCurrentAPICount);
   message$ = this.store.select(selectMessage);
+  pizzaDone$ = this.store.select(isThePizzaReady);
 
   constructor(
     private store: Store,

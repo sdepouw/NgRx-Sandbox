@@ -7,6 +7,8 @@
 <button (click)="getTheGoods()">Get the Goods</button> | <button (click)="clear()">Clear 'em Out</button>
 <h6>Gottem {{ numberOfAPICalls$ | async }} times</h6>
 
+<h4>But is the pizza cooked? {{ (pizzaDone$ | async) ? 'Hot \'n Ready' : 'Cold is good too!' }}</h4>
+
 <ul>
   <li *ngFor="let todo of todoItems$ | async">
     {{ todo.id }} - {{ todo.title }} (Complete? <strong>{{ todo.completed ? 'Yep!' : 'Nope' }}</strong>)

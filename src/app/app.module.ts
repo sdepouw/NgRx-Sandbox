@@ -12,6 +12,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { apiCallCountReducer } from './state/api-call-count.reducers';
 import { messageReducer } from './state/message.reducers';
 import { MessageEffects } from './state/message.effects';
+import { pizzaReducer } from './state/pizza.reducer';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { MessageEffects } from './state/message.effects';
     EffectsModule.forRoot([MessageEffects]),
     StoreModule.forFeature('foo', { todoItems: todosReducer, todoListTitle: todoListTitleReducer }),
     EffectsModule.forFeature([TodosEffects]),
+    StoreModule.forFeature('pizza', pizzaReducer),
     StoreDevtoolsModule.instrument(),
     HttpClientModule
   ],

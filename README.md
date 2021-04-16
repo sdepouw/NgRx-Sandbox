@@ -14,6 +14,7 @@
   - `const fs = createFeatureSeelctor('foo')` and `createSelector(fs, (todoState: TodoState) => todoState.todoItems)` is what's needed to select.
 - `StoreModule.forFeature('foo', { todoItems: todosReducer }),` here, the reducer is **just for the `todoItems` property!**
   - Like root, a different reducer is needed for each property, and a reducer **should only work with that one property!**
+  - That is, if you assign the reducer to the property instead of the whole state. See `PizzaState` for an example.
 
 ## Default Generated Stuff
 
