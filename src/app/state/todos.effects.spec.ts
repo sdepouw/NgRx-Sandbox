@@ -73,7 +73,8 @@ describe('Todos Effects', () => {
       todosServiceSpy.getTodos.and.returnValue(throwError(''));
 
       // EMPTY in this context never completes, so it adds nothing to the stream.
-      expect(effects.loadTodos$).toBeObservable(cold('---'));
+      // Empty frame ticks ('-') don't have to match exactly, so '' matches '---' matches '-----'.
+      expect(effects.loadTodos$).toBeObservable(cold(''));
     });
   });
 });
