@@ -59,11 +59,12 @@ describe('Todos Effects', () => {
            ----b (cold, waits for 'a' then kicks off on the same frame)
          ------c (the sum total of the above time; 'b' resolving is when 'c' triggers)
       */
-      actions$ = hot('     --a', { a: getTodos });
-      const todos$ = cold('  ----b', { b: expectedTodos });
+      actions$ = hot('       --a', { a: getTodos });
+      const todos$ = cold('    ----b', { b: expectedTodos });
+      const expected$ = hot('------c', { c: expectedAction });
       todosServiceSpy.getTodos.and.returnValue(todos$);
 
-      expect(effects.loadTodos$).toBeObservable(hot('------c', { c: expectedAction }));
+      expect(effects.loadTodos$).toBeObservable(expected$);
     });
 
     it('should return EMPTY observable when error occurs', () => {
