@@ -64,11 +64,9 @@ describe('Todos Effects', () => {
     it('should return EMPTY observable when error occurs', () => {
       actions$ = hot('---d', { d: getTodos });
       todosServiceSpy.getTodos.and.returnValue(throwError(''));
-      // EMPTY in this context never completes, so it adds nothing to the stream.
-      const expected = cold('---');
 
+      // EMPTY in this context never completes, so it adds nothing to the stream.
       expect(effects.loadTodos$).toBeObservable(cold('---'));
-      expect(effects.loadTodos$).toBeObservable(hot('---'));
     });
   });
 });
