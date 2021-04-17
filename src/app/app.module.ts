@@ -1,18 +1,20 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
-import { TodosEffects } from './state/todos.effects';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { EffectsModule } from '@ngrx/effects';
-import { todosReducer, todoListTitleReducer } from './state/todos.reducers';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
 import { apiCallCountReducer } from './state/api-call-count.reducers';
-import { messageReducer } from './state/message.reducers';
 import { MessageEffects } from './state/message.effects';
+import { messageReducer } from './state/message.reducers';
 import { pizzaReducer } from './state/pizza.reducer';
+import { pizzaFeatureName } from './state/pizza.selectors';
+import { TodosEffects } from './state/todos.effects';
+import { todoListTitleReducer, todosReducer } from './state/todos.reducers';
+import { todoFeatureName } from './state/todos.selectors';
+
 
 @NgModule({
   declarations: [
@@ -23,9 +25,9 @@ import { pizzaReducer } from './state/pizza.reducer';
     AppRoutingModule,
     StoreModule.forRoot({ apiCallCount: apiCallCountReducer, message: messageReducer }),
     EffectsModule.forRoot([MessageEffects]),
-    StoreModule.forFeature('foo', { todoItems: todosReducer, todoListTitle: todoListTitleReducer }),
+    StoreModule.forFeature(todoFeatureName, { todoItems: todosReducer, todoListTitle: todoListTitleReducer }),
     EffectsModule.forFeature([TodosEffects]),
-    StoreModule.forFeature('pizza', pizzaReducer),
+    StoreModule.forFeature(pizzaFeatureName, pizzaReducer),
     StoreDevtoolsModule.instrument(),
     HttpClientModule
   ],
