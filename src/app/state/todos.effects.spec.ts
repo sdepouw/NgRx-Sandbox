@@ -52,13 +52,18 @@ describe('Todos Effects', () => {
   describe('Marbles Tests', () => {
     it('should return successful todo get action with service results', () => {
       const expectedTodos: TodoItem[] = [{} as TodoItem];
-      actions$ = hot('a', { a: getTodos });
-      todosServiceSpy.getTodos.and.returnValue(
-        cold('-b', { b: expectedTodos })
-      );
       const expectedAction = getTodosSuccess({ todoItems: expectedTodos });
 
-      expect(effects.loadTodos$).toBeObservable(hot('-c', { c: expectedAction }));
+      /* Assuming the flow of time is:
+         --a     (hot, starts immediately)
+           ----b (cold, waits for 'a' then kicks off on the same frame)
+         ------c (the sum total of the above time; 'b' resolving is when 'c' triggers)
+      */
+      actions$ = hot('     --a', { a: getTodos });
+      const todos$ = cold('  ----b', { b: expectedTodos });
+      todosServiceSpy.getTodos.and.returnValue(todos$);
+
+      expect(effects.loadTodos$).toBeObservable(hot('------c', { c: expectedAction }));
     });
 
     it('should return EMPTY observable when error occurs', () => {
