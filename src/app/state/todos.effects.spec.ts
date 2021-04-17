@@ -8,12 +8,11 @@ import { TodoItem } from './todo-model';
 import { getTodos, getTodosSuccess } from './todos.actions';
 import { TodosEffects } from './todos.effects';
 
-let actions$ = new Observable<Action>();
-
-let effects: TodosEffects;
-let todosServiceSpy: jasmine.SpyObj<TodosService>;
-
 describe('Todos Effects', () => {
+  let actions$ = new Observable<Action>();
+  let effects: TodosEffects;
+  let todosServiceSpy: jasmine.SpyObj<TodosService>;
+
   beforeEach(() => {
     const todosServiceSpyObject = jasmine.createSpyObj('TodosService', ['getTodos']);
 

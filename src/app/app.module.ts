@@ -11,8 +11,9 @@ import { MessageEffects } from './state/message.effects';
 import { messageReducer } from './state/message.reducers';
 import { pizzaReducer } from './state/pizza.reducer';
 import { pizzaFeatureName } from './state/pizza.selectors';
+import { todoListTitleReducer } from './state/todo-list-title.reducers';
 import { TodosEffects } from './state/todos.effects';
-import { todoListTitleReducer, todosReducer } from './state/todos.reducers';
+import { todosReducer } from './state/todos.reducers';
 import { todoFeatureName } from './state/todos.selectors';
 
 
