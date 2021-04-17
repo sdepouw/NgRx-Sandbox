@@ -60,8 +60,8 @@ describe('Todos Effects', () => {
          ------c (the sum total of the above time; 'b' resolving is when 'c' triggers)
       */
       actions$ = hot('       --a', { a: getTodos });
-      const todos$ = hot('   ----b', { b: expectedTodos });
-      const expected$ = hot('----c', { c: expectedAction });
+      const todos$ = cold('    ----b', { b: expectedTodos });
+      const expected$ = hot('------c', { c: expectedAction });
       todosServiceSpy.getTodos.and.returnValue(todos$);
 
       expect(effects.loadTodos$).toBeObservable(expected$);
