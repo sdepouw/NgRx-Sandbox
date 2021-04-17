@@ -2,6 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { TodosService } from '@app/services/todos.service';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Action } from '@ngrx/store';
+import { expectObservableToReturn } from '@test-helpers';
 import { cold, hot } from 'jasmine-marbles';
 import { Observable, of, throwError } from 'rxjs';
 import { TodoItem } from './todo-model';
@@ -40,14 +41,11 @@ describe('Todos Effects', () => {
       });
     });
 
-    // TODO: This still doesn't work.
-    xit('should return EMPTY observable when error occurs', () => {
+    it('should return EMPTY observable when error occurs', () => {
       actions$ = of(getTodos());
       todosServiceSpy.getTodos.and.returnValue(throwError(''));
 
-      effects.loadTodos$.subscribe(result => {
-        // This never gets called.
-      });
+      expectObservableToReturn(effects.loadTodos$);
     });
   });
 
@@ -69,7 +67,8 @@ describe('Todos Effects', () => {
       // EMPTY in this context never completes, so it adds nothing to the stream.
       const expected = cold('---');
 
-      expect(effects.loadTodos$).toBeObservable(expected);
+      expect(effects.loadTodos$).toBeObservable(cold('---'));
+      expect(effects.loadTodos$).toBeObservable(hot('---'));
     });
   });
 });
