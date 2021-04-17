@@ -1,4 +1,4 @@
-import { testFeatureSelectorProjection } from '@app/test-helpers.ts';
+import { testFeatureSelectorProjection } from '@test-helpers';
 import { AppState, PizzaState } from './app.state';
 import { isThePizzaReady, selectPizzaFeature } from './pizza.selectors';
 

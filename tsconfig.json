@@ -19,6 +19,9 @@
       "dom"
     ],
     "paths": {
+      "@test-helpers": [
+        "src/app/test-helpers"
+      ],
       "@app/*": [
         "src/app/*"
       ]
