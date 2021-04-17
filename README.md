@@ -33,6 +33,8 @@
 - Using `jasmine-marbles` NPM package: `npm i jasmine-marbles --save-dev`
 - `hot()`: Creating an observable that is "already subscribed to"
 - `cold()`: Creating an observable whose subscription starts when test begins
+  - Based on the `-` frames, `cold()` waits for whatever calls it to happen within the test.
+  - `hot()` will immediately start counting frames the instant everything starts.
 - Not sure if these are the same as hot/cold observable definitions
 - Testing Use Cases
   - Mocked Service API Calls

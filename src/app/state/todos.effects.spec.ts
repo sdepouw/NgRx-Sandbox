@@ -56,12 +56,12 @@ describe('Todos Effects', () => {
 
       /* Assuming the flow of time is:
          --a     (hot, starts immediately)
-           ----b (cold, waits for 'a' then kicks off on the same frame)
+           ----b (cold, waits for 'a' then kicks off on the same frame (hot would not wait, and also start on frame 0!))
          ------c (the sum total of the above time; 'b' resolving is when 'c' triggers)
       */
       actions$ = hot('       --a', { a: getTodos });
-      const todos$ = cold('    ----b', { b: expectedTodos });
-      const expected$ = hot('------c', { c: expectedAction });
+      const todos$ = hot('   ----b', { b: expectedTodos });
+      const expected$ = hot('----c', { c: expectedAction });
       todosServiceSpy.getTodos.and.returnValue(todos$);
 
       expect(effects.loadTodos$).toBeObservable(expected$);
