@@ -7,18 +7,18 @@ import { getTodos, getTodosSuccess } from './todos.actions';
 
 @Injectable()
 export class TodosEffects {
-    loadTodos$ = createEffect(() => this.actions$.pipe(
-        ofType(getTodos),
-        mergeMap(() => this.todosService.getTodos()
-            .pipe(
-                map(todos => getTodosSuccess({ todoItems: todos })),
-                catchError(() => EMPTY)
-            )
-        )
-    ));
+  loadTodos$ = createEffect(() => this.actions$.pipe(
+    ofType(getTodos),
+    mergeMap(() => this.todosService.getTodos()
+      .pipe(
+        map(todos => getTodosSuccess({ todoItems: todos })),
+        catchError(() => EMPTY)
+      )
+    )
+  ));
 
-    constructor(
-        private actions$: Actions,
-        private todosService: TodosService
-    ) { }
+  constructor(
+    private actions$: Actions,
+    private todosService: TodosService
+  ) { }
 }
