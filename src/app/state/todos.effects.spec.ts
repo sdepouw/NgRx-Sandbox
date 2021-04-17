@@ -2,17 +2,15 @@ import { TestBed } from '@angular/core/testing';
 import { TodosService } from '@app/services/todos.service';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Action } from '@ngrx/store';
-import { Observable, of } from 'rxjs';
+import { EMPTY, Observable, of } from 'rxjs';
 import { TodoItem } from './todo-model';
-import { getTodosSuccess, getTodos } from './todos.actions';
+import { getTodos, getTodosSuccess } from './todos.actions';
 import { TodosEffects } from './todos.effects';
-import { displayMessage } from './message.actions';
 
 let actions$ = new Observable<Action>();
 
 let effects: TodosEffects;
 let todosServiceSpy: jasmine.SpyObj<TodosService>;
-
 
 describe('Todos Effects', () => {
   beforeEach(() => {
@@ -31,7 +29,7 @@ describe('Todos Effects', () => {
   });
 
   it('should return successful todo get action with service results', () => {
-    actions$ = of(getTodos()); // when subscribe() called, these actions are processed.
+    actions$ = of(getTodos());
     const expectedTodos: TodoItem[] = [{} as TodoItem];
     todosServiceSpy.getTodos.and.returnValue(of(expectedTodos));
     const expectedAction = getTodosSuccess({ todoItems: expectedTodos });
@@ -39,5 +37,14 @@ describe('Todos Effects', () => {
     effects.loadTodos$.subscribe(result => {
       expect(result).toEqual(expectedAction);
     });
+  });
+
+  it('should return EMPTY observable I think?', () => {
+    actions$ = of(getTodos());
+    todosServiceSpy.getTodos.and.throwError('');
+    const expected = EMPTY;
+
+    effects.loadTodos$.subscribe();
+    // TODO: What to expect / etc. here?
   });
 });
