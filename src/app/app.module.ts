@@ -35,6 +35,6 @@ import { TodoListComponent } from './todo-list/todo-list.component';
     HttpClientModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent] // TODO: Remove this and get the app displaying some other way. Routing?
 })
 export class AppModule { }
