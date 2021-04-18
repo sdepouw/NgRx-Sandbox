@@ -3,9 +3,9 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { provideMockStore } from '@ngrx/store/testing';
-import { AppComponent } from './app.component';
+import { TodoListComponent } from './todo-list.component';
 
-describe('AppComponent', () => {
+describe('TodoListComponent', () => {
   const initialState = {};
 
   beforeEach(async(() => {
@@ -16,7 +16,7 @@ describe('AppComponent', () => {
         EffectsModule.forRoot(),
       ],
       declarations: [
-        AppComponent
+        TodoListComponent
       ],
       providers: [
         provideMockStore({ initialState })
@@ -25,7 +25,7 @@ describe('AppComponent', () => {
   }));
 
   it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
+    const fixture = TestBed.createComponent(TodoListComponent);
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();
   });

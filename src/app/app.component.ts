@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
-import { Store, Action } from '@ngrx/store';
+import { Action, Store } from '@ngrx/store';
 import { selectCurrentAPICount } from './state/api-call-count.selectors';
-import { clearTodos, getTodos, getTodosSuccess } from './state/todos.actions';
-import { selectAllTodoItems, selectTodoTitle } from './state/todos.selectors';
-import { selectMessage } from './state/message.selectors';
 import { displayMessage } from './state/message.actions';
+import { selectMessage } from './state/message.selectors';
 import { isThePizzaReady } from './state/pizza.selectors';
+import { clearTodos, getTodosSuccess } from './state/todos.actions';
+import { selectTodoTitle } from './state/todos.selectors';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +15,6 @@ import { isThePizzaReady } from './state/pizza.selectors';
 })
 export class AppComponent implements OnInit {
   title$ = this.store.select(selectTodoTitle);
-  todoItems$ = this.store.select(selectAllTodoItems);
   numberOfAPICalls$ = this.store.select(selectCurrentAPICount);
   message$ = this.store.select(selectMessage);
   pizzaDone$ = this.store.select(isThePizzaReady);
@@ -33,13 +32,5 @@ export class AppComponent implements OnInit {
   displayMessageOnAction(action: Action, message: string) {
     this.actions$.pipe(ofType(action.type))
       .subscribe(() => { this.store.dispatch(displayMessage({ message })); });
-  }
-
-  getTheGoods() {
-    this.store.dispatch(getTodos());
-  }
-
-  clear() {
-    this.store.dispatch(clearTodos());
   }
 }

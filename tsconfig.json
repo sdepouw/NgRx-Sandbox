@@ -22,6 +22,9 @@
       "@test-helpers": [
         "src/app/test-helpers"
       ],
+      "@state/*": [
+        "src/app/state/*"
+      ],
       "@app/*": [
         "src/app/*"
       ]

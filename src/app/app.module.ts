@@ -15,11 +15,13 @@ import { todoListTitleReducer } from './state/todo-list-title.reducers';
 import { TodosEffects } from './state/todos.effects';
 import { todosReducer } from './state/todos.reducers';
 import { todoFeatureName } from './state/todos.selectors';
+import { TodoListComponent } from './todo-list/todo-list.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TodoListComponent
   ],
   imports: [
     BrowserModule,

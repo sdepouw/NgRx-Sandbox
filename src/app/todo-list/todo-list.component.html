@@ -1,0 +1,7 @@
+<button (click)="getTheGoods()">Get the Goods</button> | <button (click)="clear()">Clear 'em Out</button>
+
+<ul>
+  <li *ngFor="let todo of todoItems$ | async">
+    {{ todo.id }} - {{ todo.title }} (Complete? <strong>{{ todo.completed ? 'Yep!' : 'Nope' }}</strong>)
+  </li>
+</ul>
