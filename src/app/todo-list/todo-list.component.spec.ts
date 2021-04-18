@@ -49,19 +49,18 @@ describe('TodoListComponent', () => {
     expect(getTodoListItemElements().length).toEqual(0);
   });
 
-  it('should have single list item when state has single todo item', () => {
-    setStateTodoItems({});
+  for (let i = 1; i <= 5; i++) {
+    it(`should display an <li> element for each todo item in state (count: ${i})`, () => {
+      setStateTodoItems(i);
 
-    expect(getTodoListItemElements().length).toEqual(1);
-  });
+      const liElements = getTodoListItemElements();
 
-  it('should have list items equal to todo items', () => {
-    setStateTodoItems({}, {}, {});
+      expect(liElements.length).toEqual(i);
+    });
+  }
 
-    expect(getTodoListItemElements().length).toEqual(3);
-  });
-
-  function setStateTodoItems(...todoItems: any[]): void {
+  function setStateTodoItems(todoItemCount: number): void {
+    const todoItems: TodoItem[] = Array.from({ length: todoItemCount }, _ => ({} as TodoItem));
     mockStore.setState({ foo: { todoItems } });
     fixture.detectChanges();
   }
