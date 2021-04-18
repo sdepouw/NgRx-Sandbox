@@ -41,10 +41,8 @@ describe('TodosListComponent', () => {
       component = fixture.componentInstance;
     }));
 
-    describe('Creation', () => {
-      it('should be able to be created', () => {
-        expect(component).toBeTruthy();
-      });
+    it('should be able to create component', () => {
+      expect(component).toBeTruthy();
     });
 
     describe('Dispatching', () => {
@@ -119,7 +117,7 @@ describe('TodosListComponent', () => {
       todosServiceSpy = TestBed.inject<TodosService>(TodosService) as jasmine.SpyObj<TodosService>;
     }));
 
-    it('should be able to be created', () => {
+    it('should be able to create component', () => {
       expect(component).toBeTruthy();
     });
 

@@ -19,7 +19,7 @@ export function testFeatureSelectorProjection<TAppState, TProjection>(
   });
 }
 
-export function expectObservableToReturn<T>(observable: Observable<T>): void {
+export function expectObservableToReturnEmpty<T>(observable: Observable<T>): void {
   let nextCount = 0;
   let errorCount = 0;
   let completeCount = 0;

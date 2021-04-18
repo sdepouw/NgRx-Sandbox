@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { TodosService } from '@app/services/todos.service';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Action } from '@ngrx/store';
-import { expectObservableToReturn } from '@test-helpers';
+import { expectObservableToReturnEmpty } from '@test-helpers';
 import { cold, hot } from 'jasmine-marbles';
 import { Observable, of, throwError } from 'rxjs';
 import { TodoItem } from './todo-model';
@@ -45,7 +45,7 @@ describe('Todos Effects', () => {
       actions$ = of(getTodos());
       todosServiceSpy.getTodos.and.returnValue(throwError(''));
 
-      expectObservableToReturn(effects.loadTodos$);
+      expectObservableToReturnEmpty(effects.loadTodos$);
     });
   });
 
