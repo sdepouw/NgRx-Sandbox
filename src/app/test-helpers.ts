@@ -1,4 +1,5 @@
-import { TestBed } from '@angular/core/testing';
+import { DebugElement } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { select, Selector } from '@ngrx/store';
 import { MockStore } from '@ngrx/store/testing';
 import { Observable, of } from 'rxjs';
@@ -40,3 +41,9 @@ export function createMockStoreWithDispatchSpy(): MockStore {
   spyOn(mockStore, 'dispatch');
   return mockStore;
 }
+
+export const getDebugElementText = (element: DebugElement): string => element.nativeElement.textContent.trim();
+export const clickDebugElement = <T>(fixture: ComponentFixture<T>, element: DebugElement): void => {
+  element.nativeElement.click();
+  fixture.detectChanges();
+};

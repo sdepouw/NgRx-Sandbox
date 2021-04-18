@@ -15,6 +15,8 @@ Store Integration Testing
     - Same file? (i.e. app.component.spec.ts)
         - Pro: Easy to find, and can be separate from unit tests / labeled as such thanks to describe()
         - Con: Unit Tests + Integration Tests in one file
+        - Pro: Can share common definitions (helper functions for the component etc.)
     - Different file (maybe app.component.integration.spec.ts)
         - Pro: Next to Unit Tests
         - Con: Not the usual convention?
+    - Currently doing them in the same file.
