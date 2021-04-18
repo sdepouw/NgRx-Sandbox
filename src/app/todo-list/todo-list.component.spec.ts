@@ -1,12 +1,13 @@
+import { HttpClientModule } from '@angular/common/http';
 import { DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { TodosService } from '@app/services/todos.service';
-import { EffectsModule } from '@ngrx/effects';
-import { StoreModule } from '@ngrx/store';
+import { Actions, EffectsModule, ofType } from '@ngrx/effects';
+import { StoreModule, ActionsSubject } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { TodoItem } from '@state/todo-model';
-import { clearTodos, getTodos } from '@state/todos.actions';
+import { clearTodos, getTodos, getTodosSuccess } from '@state/todos.actions';
 import { TodosEffects } from '@state/todos.effects';
 import { todosReducer } from '@state/todos.reducers';
 import { todoFeatureName } from '@state/todos.selectors';
@@ -93,7 +94,7 @@ describe('TodosListComponent', () => {
     };
   });
 
-  describe('State Integration Tests', () => {
+  describe('NgRx Store Integration Tests', () => {
     let todosServiceSpy: jasmine.SpyObj<TodosService>;
 
     beforeEach(async(() => {
@@ -103,7 +104,7 @@ describe('TodosListComponent', () => {
           StoreModule.forRoot({}),
           EffectsModule.forRoot([]),
           StoreModule.forFeature(todoFeatureName, { todoItems: todosReducer }),
-          EffectsModule.forFeature([TodosEffects]),
+          EffectsModule.forFeature([TodosEffects])
         ],
         declarations: [
           TodoListComponent
@@ -142,6 +143,45 @@ describe('TodosListComponent', () => {
 
       testHelpers.clickDebugElement(fixture, getClearButton());
       expect(getTodoListItemElements().length).toEqual(0);
+    });
+  });
+
+  describe('Full Integration Tests', () => {
+    let actions$: Actions;
+
+    beforeEach(async(() => {
+      TestBed.configureTestingModule({
+        imports: [
+          StoreModule.forRoot({}),
+          EffectsModule.forRoot([]),
+          StoreModule.forFeature(todoFeatureName, { todoItems: todosReducer }),
+          EffectsModule.forFeature([TodosEffects]),
+          HttpClientModule
+        ],
+        declarations: [
+          TodoListComponent
+        ],
+        providers: [
+          TodosService
+        ]
+      }).compileComponents();
+      fixture = TestBed.createComponent(TodoListComponent);
+      component = fixture.componentInstance;
+      actions$ = TestBed.inject(Actions);
+    }));
+
+    it('should be able to create component', () => {
+      expect(component).toBeTruthy();
+    });
+
+    it('should display todo items from service on click', (done) => {
+      testHelpers.clickDebugElement(fixture, getGoodsButton());
+
+      actions$.pipe(ofType(getTodosSuccess)).subscribe(_ => {
+        fixture.detectChanges();
+        expect(getTodoListItemElements().length).toBeGreaterThan(0);
+        done();
+      });
     });
   });
 });
