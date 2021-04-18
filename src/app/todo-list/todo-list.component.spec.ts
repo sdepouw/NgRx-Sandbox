@@ -4,7 +4,7 @@ import { StoreModule } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { TodoListComponent } from './todo-list.component';
 
-fdescribe('TodoListComponent', () => {
+describe('TodoListComponent', () => {
   const initialState = {};
   let mockStore: MockStore;
 
@@ -35,7 +35,7 @@ fdescribe('TodoListComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should dispatch for todo items when get goods clicked', () => {
+  xit('should dispatch for todo items when get goods clicked', () => {
     // component.getTheGoods();
 
     // Doesn't exist on 10.2.1
