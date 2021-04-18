@@ -49,7 +49,7 @@ describe('TodoListComponent', () => {
     expect(getTodoListItemElements().length).toEqual(0);
   });
 
-  for (let i = 1; i <= 5; i++) {
+  for (let i = 0; i <= 5; i++) {
     it(`should display an <li> element for each todo item in state (count: ${i})`, () => {
       setStateTodoItems(i);
 
