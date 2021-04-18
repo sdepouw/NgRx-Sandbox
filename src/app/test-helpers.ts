@@ -1,4 +1,6 @@
+import { TestBed } from '@angular/core/testing';
 import { select, Selector } from '@ngrx/store';
+import { MockStore } from '@ngrx/store/testing';
 import { Observable, of } from 'rxjs';
 
 export function testFeatureSelectorProjection<TAppState, TProjection>(
@@ -31,4 +33,10 @@ export function expectObservableToReturn<T>(observable: Observable<T>): void {
   expect(nextCount).withContext('Next Count').toEqual(0);
   expect(errorCount).withContext('Error Count').toEqual(0);
   expect(completeCount).withContext('Complete Count').toEqual(1);
+}
+
+export function createMockStoreWithDispatchSpy(): MockStore {
+  const mockStore = TestBed.inject(MockStore);
+  spyOn(mockStore, 'dispatch');
+  return mockStore;
 }
