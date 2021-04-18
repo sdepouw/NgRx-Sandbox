@@ -29,43 +29,61 @@ describe('TodoListComponent', () => {
     component = fixture.componentInstance;
   }));
 
-  it('should be able to be created', () => {
-    expect(component).toBeTruthy();
-  });
-
-  it('should dispatch for todo items when get goods clicked', () => {
-    component.getTheGoods();
-
-    expect(mockStore.dispatch).toHaveBeenCalledWith(getTodos());
-  });
-
-  it('should dispatch for clearing todo items when clear clicked', () => {
-    component.clear();
-
-    expect(mockStore.dispatch).toHaveBeenCalledWith(clearTodos());
-  });
-
-  it('should have empty list when state has no todo items', () => {
-    expect(getTodoListItemElements().length).toEqual(0);
-  });
-
-  for (let i = 0; i <= 5; i++) {
-    it(`should display an <li> element for each todo item in state (count: ${i})`, () => {
-      setStateTodoItems(i);
-
-      const liElements = getTodoListItemElements();
-
-      expect(liElements.length).toEqual(i);
+  describe('Creation', () => {
+    it('should be able to be created', () => {
+      expect(component).toBeTruthy();
     });
-  }
+  });
 
-  function setStateTodoItems(todoItemCount: number): void {
-    const todoItems: TodoItem[] = Array.from({ length: todoItemCount }, _ => ({} as TodoItem));
+  describe('Dispatching', () => {
+    it('should dispatch for todo items when get goods clicked', () => {
+      component.getTheGoods();
+
+      expect(mockStore.dispatch).toHaveBeenCalledWith(getTodos());
+    });
+
+    it('should dispatch for clearing todo items when clear clicked', () => {
+      component.clear();
+
+      expect(mockStore.dispatch).toHaveBeenCalledWith(clearTodos());
+    });
+  });
+
+  describe('Listing Todo Items', () => {
+    for (let i = 0; i <= 5; i++) {
+      it(`should display an <li> element for each todo item in state (count: ${i})`, () => {
+        const todoItems: TodoItem[] = Array.from({ length: i }, _ => ({} as TodoItem));
+        setStateTodoItems(todoItems);
+
+        const liElements = getTodoListItemElements();
+
+        expect(liElements.length).toEqual(i);
+      });
+    }
+  });
+
+  describe('Displaying Todo Item Status', () => {
+    [
+      { title: 'complete', expectedStatus: 'Yep!', isComplete: true },
+      { title: 'incomplete', expectedStatus: 'Nope', isComplete: false },
+    ].forEach(testCase => {
+      it(`should display ${testCase.title} todo item status`, () => {
+        setStateTodoItems([{ completed: testCase.isComplete } as TodoItem]);
+
+        const statusText = getDebugElementText(getSingleTodoItemStatusText());
+
+        expect(statusText).toEqual(testCase.expectedStatus);
+      });
+    });
+  });
+
+  const setStateTodoItems = (todoItems: TodoItem[]): void => {
     mockStore.setState({ foo: { todoItems } });
     fixture.detectChanges();
-  }
+  };
 
-  function getTodoListItemElements(): DebugElement[] {
-    return fixture.debugElement.queryAll(By.css('li'));
-  }
+  const getTodoListItemElements = (): DebugElement[] => fixture.debugElement.queryAll(By.css('li'));
+  const getSingleTodoItemStatusText = (): DebugElement => fixture.debugElement.query(By.css('strong'));
+
+  const getDebugElementText = (element: DebugElement): string => element.nativeElement.textContent.trim();
 });
