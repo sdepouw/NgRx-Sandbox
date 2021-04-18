@@ -4,10 +4,11 @@
   {{ message }}
 </div>
 
-<button (click)="getTheGoods()">Get the Goods</button> | <button (click)="clear()">Clear 'em Out</button>
-<h6>Gottem {{ numberOfAPICalls$ | async }} times</h6>
+<h6>Goods Gotten {{ numberOfAPICalls$ | async }} time{{ (numberOfAPICalls$ | async) !== 1 ? 's' : '' }}</h6>
 
 <h4>But is the pizza cooked? {{ (pizzaDone$ | async) ? 'Hot \'n Ready' : 'Cold is good too!' }}</h4>
+
+<button (click)="getTheGoods()">Get the Goods</button> | <button (click)="clear()">Clear 'em Out</button>
 
 <ul>
   <li *ngFor="let todo of todoItems$ | async">
