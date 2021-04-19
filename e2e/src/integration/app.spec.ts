@@ -1,6 +1,6 @@
 describe('Todo App Home Page', () => {
-  const getHeader = () => cy.findByRole('heading', { name: /todos/i });
-  const getGoodsButton = () => cy.findByRole('button', { name: /goods/i });
+  const getHeader = () => cy.findByRole('heading', { level: 1 });
+  const getGoodsButton = () => cy.findByRole('button', { name: 'Get the Goods' });
   const getClearButton = () => cy.findByRole('button', { name: /clear/i });
   const getTodoListItems = () => cy.findByRole('list');
   const getMessage = () => cy.findByRole('alert');
@@ -15,6 +15,7 @@ describe('Todo App Home Page', () => {
     getClearButton().click();
     getTodoListItems().should('not.be.visible');
 
-    getMessage().should('be.visible').should('not.exist');
+    getMessage().should('be.visible');
+    getMessage().should('not.exist');
   });
 });
