@@ -89,7 +89,7 @@ describe('TodosListComponent', () => {
     });
 
     const setStateTodoItems = (todoItems: TodoItem[]): void => {
-      mockStore.setState({ foo: { todoItems } });
+      mockStore.setState({ [todoFeatureName]: { todoItems } });
       fixture.detectChanges();
     };
   });
@@ -123,7 +123,7 @@ describe('TodosListComponent', () => {
     });
 
     it('should display todo items on click', () => {
-      const expectedTodos: TodoItem[] = [{ title: 'foo' } as TodoItem, { title: 'bar' } as TodoItem];
+      const expectedTodos: TodoItem[] = [{ title: 'buzz' } as TodoItem, { title: 'bar' } as TodoItem];
       todosServiceSpy.getTodos.and.returnValue(of(expectedTodos));
       testHelpers.clickDebugElement(fixture, getGoodsButton());
 
