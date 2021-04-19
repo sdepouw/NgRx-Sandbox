@@ -1,4 +1,10 @@
 describe('Todo App Home Page', () => {
+  it('should work', () => {
+    cy.visit('/');
+    const header = cy.get('h1');
+
+    header.contains('todo');
+  });
   // const page = new AppPage();
 
   // it('should display everything properly', async () => {
