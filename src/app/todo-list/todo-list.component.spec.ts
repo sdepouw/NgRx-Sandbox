@@ -4,8 +4,9 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { TodosService } from '@app/services/todos.service';
 import { Actions, EffectsModule, ofType } from '@ngrx/effects';
-import { StoreModule, ActionsSubject } from '@ngrx/store';
+import { StoreModule } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { TodoState } from '@state/app.state';
 import { TodoItem } from '@state/todo-model';
 import { clearTodos, getTodos, getTodosSuccess } from '@state/todos.actions';
 import { TodosEffects } from '@state/todos.effects';
@@ -18,7 +19,6 @@ import { TodoListComponent } from './todo-list.component';
 describe('TodosListComponent', () => {
   let fixture: ComponentFixture<TodoListComponent>;
   let component: TodoListComponent;
-
   const getTodoListItemElements = (): DebugElement[] => fixture.debugElement.queryAll(By.css('li'));
   const getSingleTodoItemStatusText = (): DebugElement => fixture.debugElement.query(By.css('strong'));
   const getGoodsButton = (): DebugElement => fixture.debugElement.queryAll(By.css('button'))[0];
@@ -38,6 +38,7 @@ describe('TodosListComponent', () => {
         ]
       }).compileComponents();
       mockStore = testHelpers.createMockStoreWithDispatchSpy();
+      mockStore.setState({ [todoFeatureName]: {} as TodoState });
       fixture = TestBed.createComponent(TodoListComponent);
       component = fixture.componentInstance;
     }));
@@ -48,11 +49,7 @@ describe('TodosListComponent', () => {
 
     describe('Dispatching', () => {
       it('should dispatch for todo items when get goods clicked', () => {
-        // TODO: For some reason, this makes random tests fail. Bootstrapping the app component issue?
-        // TypeError: Cannot read property 'todoItems' of undefined.
-        // testHelpers.clickDebugElement(fixture, getGoodsButton());
-
-        component.getTheGoods();
+        testHelpers.clickDebugElement(fixture, getGoodsButton());
 
         expect(mockStore.dispatch).toHaveBeenCalledWith(getTodos());
       });
