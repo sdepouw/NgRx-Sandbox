@@ -48,6 +48,10 @@ describe('TodosListComponent', () => {
 
     describe('Dispatching', () => {
       it('should dispatch for todo items when get goods clicked', () => {
+        // TODO: For some reason, this makes random tests fail. Bootstrapping the app component issue?
+        // TypeError: Cannot read property 'todoItems' of undefined.
+        // testHelpers.clickDebugElement(fixture, getGoodsButton());
+
         component.getTheGoods();
 
         expect(mockStore.dispatch).toHaveBeenCalledWith(getTodos());
