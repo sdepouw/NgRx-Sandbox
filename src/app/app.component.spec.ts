@@ -1,26 +1,17 @@
 import { async, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { EffectsModule } from '@ngrx/effects';
-import { StoreModule } from '@ngrx/store';
-import { provideMockStore } from '@ngrx/store/testing';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
-  const initialState = {};
-
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule,
-        StoreModule.forRoot({}),
-        EffectsModule.forRoot(),
+        RouterTestingModule
       ],
       declarations: [
         AppComponent
       ],
-      providers: [
-        provideMockStore({ initialState })
-      ]
+      providers: []
     }).compileComponents();
   }));
 

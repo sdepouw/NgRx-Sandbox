@@ -1,11 +1,1 @@
-<h1>{{ title$ | async }}</h1>
-
-<div role="alert" *ngIf="message$ | async as message" style="margin-bottom: 30px;">
-  {{ message }}
-</div>
-
-<h6>Goods Gotten {{ numberOfAPICalls$ | async }} time{{ (numberOfAPICalls$ | async) !== 1 ? 's' : '' }}</h6>
-
-<h4>But is the pizza cooked? {{ (pizzaDone$ | async) ? 'Hot \'n Ready' : 'Cold is good too!' }}</h4>
-
-<app-todo-list></app-todo-list>
+<router-outlet></router-outlet>

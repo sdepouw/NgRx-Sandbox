@@ -6,6 +6,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HomeComponent } from './home/home.component';
 import { apiCallCountReducer } from './state/api-call-count.reducers';
 import { MessageEffects } from './state/message.effects';
 import { messageReducer } from './state/message.reducers';
@@ -17,10 +18,10 @@ import { todosReducer } from './state/todos.reducers';
 import { todoFeatureName } from './state/todos.selectors';
 import { TodoListComponent } from './todo-list/todo-list.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
+    HomeComponent,
     TodoListComponent
   ],
   imports: [
@@ -35,6 +36,6 @@ import { TodoListComponent } from './todo-list/todo-list.component';
     HttpClientModule
   ],
   providers: [],
-  bootstrap: [AppComponent] // TODO: Remove this and get the app displaying some other way. Routing?
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
