@@ -1,6 +1,6 @@
 <h1>{{ title$ | async }}</h1>
 
-<div *ngIf="message$ | async as message" style="margin-bottom: 30px;">
+<div role="alert" *ngIf="message$ | async as message" style="margin-bottom: 30px;">
   {{ message }}
 </div>
 

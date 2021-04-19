@@ -33,6 +33,7 @@
     "@ngrx/store-devtools": "^11.1.0",
     "@nrwl/cypress": "^12.0.7",
     "@nrwl/workspace": "^12.0.7",
+    "@testing-library/cypress": "^7.0.6",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
