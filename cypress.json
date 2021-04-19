@@ -1,4 +1,7 @@
 {
   "baseUrl": "https://localhost:4200",
-  "integrationFolder": "e2e/src/integration"
+  "integrationFolder": "e2e/src/integration",
+  "fixturesFolder": "e2e/src/fixtures",
+  "screenshotOnRunFailure": false,
+  "video": false
 }
