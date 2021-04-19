@@ -1,6 +1,6 @@
 {
   "baseUrl": "https://localhost:4200",
-  "integrationFolder": "e2e/src/integration",
+  "integrationFolder": "e2e/src/tests",
   "fixturesFolder": "e2e/src/fixtures",
   "supportFile": "e2e/src/support/index.js",
   "screenshotOnRunFailure": false,
