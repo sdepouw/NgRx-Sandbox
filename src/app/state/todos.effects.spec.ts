@@ -60,8 +60,8 @@ describe('Todos Effects', () => {
          ------c (the sum total of the above time; 'b' resolving is when 'c' triggers;
                   "hot"/"cold" doesn't matter as it's not a part of the flow/just a varable for comparison)
       */
-      actions$ = hot('       --a', { a: getTodos });
-      const todos$ = cold('    ----b', { b: expectedTodos });
+      actions$ = hot('        --a', { a: getTodos });
+      const todos$ = cold('     ----b', { b: expectedTodos });
       const expected$ = cold('------c', { c: expectedAction });
       todosServiceSpy.getTodos.and.returnValue(todos$);
 
