@@ -1,6 +1,6 @@
 import { createSelector, createFeatureSelector } from '@ngrx/store';
 import { TodoItem } from './todo-model';
-import { TodoState } from '@state/app.state';
+import { TodoState } from './todo.state';
 
 export const todoFeatureName = 'foo';
 
