@@ -12,11 +12,8 @@ import { MessageEffects } from './state/message.effects';
 import { messageReducer } from './state/message.reducers';
 import { pizzaReducer } from './state/pizza.reducer';
 import { pizzaFeatureName } from './state/pizza.selectors';
-import { todoListTitleReducer } from './state/todo-list-title.reducers';
-import { TodosEffects } from './state/todos.effects';
-import { todosReducer } from './state/todos.reducers';
-import { todoFeatureName } from './state/todos.selectors';
 import { TodoListComponent } from './todo-list/todo-list.component';
+import { TodosModule } from './todos/todos.module';
 
 @NgModule({
   declarations: [
@@ -29,11 +26,10 @@ import { TodoListComponent } from './todo-list/todo-list.component';
     AppRoutingModule,
     StoreModule.forRoot({ apiCallCount: apiCallCountReducer, message: messageReducer }),
     EffectsModule.forRoot([MessageEffects]),
-    StoreModule.forFeature(todoFeatureName, { todoItems: todosReducer, todoListTitle: todoListTitleReducer }),
-    EffectsModule.forFeature([TodosEffects]),
     StoreModule.forFeature(pizzaFeatureName, pizzaReducer),
     StoreDevtoolsModule.instrument(),
-    HttpClientModule
+    HttpClientModule,
+    TodosModule
   ],
   providers: [],
   bootstrap: [AppComponent]
