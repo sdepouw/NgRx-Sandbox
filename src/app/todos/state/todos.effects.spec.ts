@@ -1,8 +1,8 @@
 import { TestBed } from '@angular/core/testing';
-import { TodosService } from '@app/services/todos.service';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Action } from '@ngrx/store';
 import { expectObservableToReturnEmpty } from '@test-helpers';
+import { TodosService } from '@todos/services/todos.service';
 import { cold, hot } from 'jasmine-marbles';
 import { Observable, of, throwError } from 'rxjs';
 import { TodoItem } from './todo-model';

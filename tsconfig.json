@@ -19,11 +19,17 @@
       "dom"
     ],
     "paths": {
-      "@test-helpers": [
-        "src/app/test-helpers"
+      "@state-todos/*": [
+        "src/app/todos/state/*"
+      ],
+      "@todos/*": [
+        "src/app/todos/*"
       ],
       "@state/*": [
         "src/app/state/*"
+      ],
+      "@test-helpers": [
+        "src/app/test-helpers"
       ],
       "@app/*": [
         "src/app/*"

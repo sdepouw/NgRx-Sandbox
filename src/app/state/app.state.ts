@@ -1,16 +1,11 @@
-import { TodoItem } from './todo-model';
-import { todoFeatureName } from './todos.selectors';
+import { TodoState } from '@state-todos/todo.state';
+import { todoFeatureName } from '@state-todos/todos.selectors';
 
 export interface AppState {
-  [todoFeatureName]: TodoState;
+  [todoFeatureName]: TodoState; // TODO: Does this need to be declared here?
   pizza: PizzaState;
   apiCallCount: number;
   message: string;
-}
-
-export interface TodoState {
-  todoItems: ReadonlyArray<TodoItem>;
-  todoListTitle: string;
 }
 
 export interface PizzaState {

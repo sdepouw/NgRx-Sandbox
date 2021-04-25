@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { clearTodos, getTodos } from '@state/todos.actions';
-import { selectAllTodoItems } from '@state/todos.selectors';
+import { clearTodos, getTodos } from '@state-todos/todos.actions';
+import { selectAllTodoItems } from '@state-todos/todos.selectors';
 
 @Component({
   selector: 'app-todo-list',
