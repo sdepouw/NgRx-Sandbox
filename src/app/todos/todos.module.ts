@@ -16,6 +16,9 @@ import { TodoListComponent } from '@todos/todo-list/todo-list.component';
     CommonModule,
     StoreModule.forFeature(todoFeatureName, { todoItems: todosReducer, todoListTitle: todoListTitleReducer }),
     EffectsModule.forFeature([TodosEffects]),
+  ],
+  exports: [
+    TodoListComponent
   ]
 })
 export class TodosModule { }
