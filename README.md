@@ -15,6 +15,8 @@
 - `StoreModule.forFeature('foo', { todoItems: todosReducer }),` here, the reducer is **just for the `todoItems` property!**
   - Like root, a different reducer is needed for each property, and a reducer **should only work with that one property!**
   - That is, if you assign the reducer to the property instead of the whole state. See `PizzaState` for an example.
+- These feature states don't necessarily need to be added to the `AppState` interface
+  - I split out the Todo stuff into its own feature module as a demonstration of this
 
 ## Testing Selectors
 - Using `projector()` works nicely, feeding it what will get *projected* (i.e. **after the first argument of the selector filters it down**) and testing the result
