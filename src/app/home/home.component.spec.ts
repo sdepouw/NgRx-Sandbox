@@ -4,18 +4,17 @@ import { EffectsModule } from '@ngrx/effects';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Action, StoreModule } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
-import { getTodosSuccess } from '@state-todos/todos.actions';
-import { displayMessage } from '@state/message.actions';
-import * as testHelpers from '@test-helpers';
-import { TodoListComponent } from '@todos/todo-list/todo-list.component';
-import { hot } from 'jasmine-marbles';
-import { MockComponent } from 'ng-mocks';
-import { Observable } from 'rxjs';
-import { HomeComponent } from './home.component';
+import { getTodosSuccess, clearTodos } from '@state-todos/todos.actions';
 import { selectTodoTitle } from '@state-todos/todos.selectors';
 import { selectCurrentAPICount } from '@state/api-call-count.selectors';
+import { displayMessage } from '@state/message.actions';
 import { selectMessage } from '@state/message.selectors';
 import { isThePizzaReady } from '@state/pizza.selectors';
+import * as testHelpers from '@test-helpers';
+import { TodoListComponent } from '@todos/todo-list/todo-list.component';
+import { MockComponent } from 'ng-mocks';
+import { Observable, of } from 'rxjs';
+import { HomeComponent } from './home.component';
 
 describe('HomeComponent', () => {
   const initialState = {};
@@ -55,12 +54,24 @@ describe('HomeComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  // TODO: This test is currently failing, because the Action subscription is never getting called.
-  xit('should display message when TODOs are gotten', () => {
-    actions$ = hot('----a--', { a: getTodosSuccess({ todoItems: [] }) });
+  it('should display message when TODOs are gotten', () => {
+    // Only use Marbles testing when you care about exactly when events happen.
+    // Things like this are better kept within Effects, generally.
+    // In our case, maybe want to handle message displays there via some global state.
+    // For now, we'll test with of().
+    actions$ = of(getTodosSuccess({ todoItems: [] }));
 
+    // This cannot be called until after we set actions$, as the first call to this calls ngOnInit().
     fixture.detectChanges();
 
     expect(mockStore.dispatch).toHaveBeenCalledWith(displayMessage({ message: 'Successfully Got!' }));
+  });
+
+  it('should display message when TODOs are cleared', () => {
+    actions$ = of(clearTodos());
+
+    fixture.detectChanges();
+
+    expect(mockStore.dispatch).toHaveBeenCalledWith(displayMessage({ message: 'All Cleaned Up!' }));
   });
 });

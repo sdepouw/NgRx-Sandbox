@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
-import { Action, Store } from '@ngrx/store';
+import { ActionCreator, Store } from '@ngrx/store';
 import { clearTodos, getTodosSuccess } from '@state-todos/todos.actions';
 import { selectTodoTitle } from '@state-todos/todos.selectors';
 import { selectCurrentAPICount } from '@state/api-call-count.selectors';
@@ -29,8 +29,9 @@ export class HomeComponent implements OnInit {
     this.displayMessageOnAction(clearTodos, 'All Cleaned Up!');
   }
 
-  displayMessageOnAction(action: Action, message: string) {
-    this.actions$.pipe(ofType(action.type))
+  displayMessageOnAction(action: ActionCreator, message: string) {
+    this.actions$
+      .pipe(ofType(action.type))
       .subscribe(() => { this.store.dispatch(displayMessage({ message })); });
   }
 }

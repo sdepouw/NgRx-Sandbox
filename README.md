@@ -46,6 +46,14 @@
     - they have no data they produce themselves (not sure if this is correct)
     - The NgRx Documentation sets them up this way
 
+## Testing Subscriptions to Actions within Components
+- use `of()` instead of Marbles (`hot()` or `cold()`), as we usually don't care about when exactly the Actions occur
+  - `of()` is more synchronous / easier to test anyway
+- if you subscribe within `ngOnInit()`, you must set the `actions$` within your test **before calling** `fixture.detectChanges()`
+  - The first time that's called, it invokes `ngOnInit()`
+- Generally, these subscriptions should be handled/encapsulated within Effects
+  - Consider using State to do things like display messages/toasts, etc.
+
 ## Mocking Notes
 - To mock an API/Observable error
   - `todosServiceSpy.getTodos.and.returnValue(throwError(''));`
