@@ -4,7 +4,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Action, StoreModule } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
-import { getTodosSuccess, clearTodos } from '@state-todos/todos.actions';
+import { clearTodos, getTodosSuccess } from '@state-todos/todos.actions';
 import { selectTodoTitle } from '@state-todos/todos.selectors';
 import { selectCurrentAPICount } from '@state/api-call-count.selectors';
 import { displayMessage } from '@state/message.actions';
